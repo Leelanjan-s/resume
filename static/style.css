@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000;
+    margin: 40px;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    border-top: 1px solid #000;
+    padding-top: 5px;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.designation {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.contact {
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+p {
+    margin: 4px 0;
+}
+
+ul {
+    margin: 5px 0 5px 20px;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 4px;
+}
+
+.project {
+    margin-bottom: 12px;
+}
+
+.project-title {
+    font-weight: bold;
+}
+
+.project-role {
+    font-style: italic;
+}
+
+.page-break {
+    page-break-before: always;
+}

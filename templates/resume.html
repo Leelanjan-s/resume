@@ -1,0 +1,31 @@
+<header>COMPANY NAME</header>
+
+<div class="name">{{ employee.name }}</div>
+<div class="designation">{{ employee.designation }}</div>
+<div class="contact">
+    {{ employee.email }} | {{ employee.phone }}
+</div>
+
+<div class="section">
+    <div class="section-title">Summary</div>
+    <p>{{ employee.summary }}</p>
+</div>
+
+<div class="section">
+    <div class="section-title">Technical Skills</div>
+    <p>{{ employee.technical_skills }}</p>
+</div>
+
+<div class="section">
+    <div class="section-title">Projects</div>
+    {% for project, role in projects %}
+        <div class="project">
+            <div class="project-title">{{ project.project_name }}</div>
+            <div class="project-role">Role: {{ role }}</div>
+            <p>{{ project.description }}</p>
+            <p><b>Technologies:</b> {{ project.technologies_used }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<footer>© Company Confidential</footer>
