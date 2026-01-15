@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Builder Dashboard</title>
+</head>
+<body>
+
+<h1>Resume Builder</h1>
+<hr>
+
+<h2>Add Employee</h2>
+<form action="/add_employee" method="post">
+    Name: <input type="text" name="name" required><br>
+    Designation: <input type="text" name="designation"><br>
+    Email: <input type="email" name="email"><br>
+    Phone: <input type="text" name="phone"><br>
+    Summary: <textarea name="summary"></textarea><br>
+    Technical Skills: <textarea name="technical_skills"></textarea><br>
+    <button type="submit">Add Employee</button>
+</form>
+
+<hr>
+
+<h2>Add Project</h2>
+<form action="/add_project" method="post">
+    Project Name: <input type="text" name="project_name" required><br>
+    Description: <textarea name="description"></textarea><br>
+    Technologies Used: <textarea name="technologies_used"></textarea><br>
+    <button type="submit">Add Project</button>
+</form>
+
+<hr>
+
+<h2>Assign Project</h2>
+<form action="/assign_project" method="post">
+    Employee:
+    <select name="employee_id">
+        {% for emp in employees %}
+            <option value="{{ emp.employee_id }}">{{ emp.name }}</option>
+        {% endfor %}
+    </select><br>
+
+    Project:
+    <select name="project_id">
+        {% for proj in projects %}
+            <option value="{{ proj.project_id }}">{{ proj.project_name }}</option>
+        {% endfor %}
+    </select><br>
+
+    Role: <input type="text" name="role"><br>
+    <button type="submit">Assign</button>
+</form>
+
+<hr>
+
+<h2>Search Employee</h2>
+<form action="/generate" method="post">
+    <input type="text" name="query" placeholder="Enter Employee ID or Name" required>
+    <button type="submit">Generate Resume</button>
+</form>
+
+</body>
+</html>

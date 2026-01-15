@@ -1,0 +1,17 @@
+<h2>Assign Project</h2>
+<form action="/assign_project" method="post">
+    Employee:
+    <select name="employee_id">
+        {% for emp in employees %}
+            <option value="{{ emp.employee_id }}">{{ emp.name }}</option>
+        {% endfor %}
+    </select><br>
+    Project:
+    <select name="project_id">
+        {% for proj in projects %}
+            <option value="{{ proj.project_id }}">{{ proj.project_name }}</option>
+        {% endfor %}
+    </select><br>
+    Role: <input type="text" name="role"><br>
+    <button type="submit">Assign</button>
+</form>
