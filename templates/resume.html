@@ -1,31 +1,162 @@
-<header>pace wisdom</header>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume - {{ employee.name }}</title>
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+            color: #333;
+        }
 
-<div class="name">{{ employee.name }}</div>
-<div class="designation">{{ employee.designation }}</div>
-<div class="contact">
-    {{ employee.email }} | {{ employee.phone }}
-</div>
+        /* User's Custom Classes */
+        header {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-<div class="section">
-    <div class="section-title">Summary</div>
-    <p>{{ employee.summary }}</p>
-</div>
+        .name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-transform: uppercase;
+        }
 
-<div class="section">
-    <div class="section-title">Technical Skills</div>
-    <p>{{ employee.technical_skills }}</p>
-</div>
+        .designation {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 5px;
+        }
 
-<div class="section">
-    <div class="section-title">Projects</div>
-    {% for project, role in projects %}
-        <div class="project">
-            <div class="project-title">{{ project.project_name }}</div>
-            <div class="project-role">Role: {{ role }}</div>
-            <p>{{ project.description }}</p>
-            <p><b>Technologies:</b> {{ project.technologies_used }}</p>
-        </div>
-    {% endfor %}
-</div>
+        .contact {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
 
-<footer>© Company Confidential</footer>
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2980b9; /* Nice blue for headers */
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .project {
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .project-role {
+            font-style: italic;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        /* BUTTON STYLES (Only visible on screen) */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        button.print-btn {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button.print-btn:hover {
+            background-color: #1c5980;
+        }
+        
+        a.back-link {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        /* PRINT STYLES (What happens when you save as PDF) */
+        @media print {
+            .btn-container { display: none; } /* Hides the button */
+            body { padding: 0; margin: 0; }
+            header { margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>pace wisdom</header>
+
+    <div class="name">{{ employee.name }}</div>
+    <div class="designation">{{ employee.designation }}</div>
+    <div class="contact">
+        {{ employee.email }} | {{ employee.phone }}
+    </div>
+
+    <div class="section">
+        <div class="section-title">Summary</div>
+        <p>{{ employee.summary }}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Technical Skills</div>
+        <p>{{ employee.technical_skills }}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Projects</div>
+        {% for project, role in projects %}
+            <div class="project">
+                <div class="project-title">{{ project.project_name }}</div>
+                <div class="project-role">Role: {{ role }}</div>
+                <p>{{ project.description }}</p>
+                <p><b>Technologies:</b> {{ project.technologies_used }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <footer>© Company Confidential</footer>
+    <div class="btn-container">
+        <button class="print-btn" onclick="window.print()">Download / Save as PDF</button>
+        <a href="/" class="back-link">← Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

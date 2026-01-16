@@ -1,63 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Builder Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --border-color: #dcdde1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding doesn't break layout */
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        .search-section {
+            grid-column: 1 / -1; /* Make search bar span full width */
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Resume Builder</h1>
-<hr>
+<div class="container">
+    <header>
+        <h1>Resume Builder Dashboard</h1>
+        <p>Manage employees, projects, and generate resumes efficiently.</p>
+    </header>
 
-<h2>Add Employee</h2>
-<form action="/add_employee" method="post">
-    Name: <input type="text" name="name" required><br>
-    Designation: <input type="text" name="designation"><br>
-    Email: <input type="email" name="email"><br>
-    Phone: <input type="text" name="phone"><br>
-    Summary: <textarea name="summary"></textarea><br>
-    Technical Skills: <textarea name="technical_skills"></textarea><br>
-    <button type="submit">Add Employee</button>
-</form>
+    <div class="card search-section">
+        <h2>Generate Resume</h2>
+        <form action="/generate" method="post">
+            <input type="text" name="query" placeholder="Enter Employee ID or Name" required style="text-align: center; font-size: 1.1em;">
+            <button type="submit">Search & Generate</button>
+        </form>
+    </div>
 
-<hr>
+    <div class="grid">
+        <div class="card">
+            <h2>Add Employee</h2>
+            <form action="/add_employee" method="post">
+                <label>Name</label>
+                <input type="text" name="name" required placeholder="John Doe">
+                
+                <label>Designation</label>
+                <input type="text" name="designation" placeholder="Software Engineer">
+                
+                <label>Email</label>
+                <input type="email" name="email" placeholder="john@example.com">
+                
+                <label>Phone</label>
+                <input type="text" name="phone" placeholder="+1 234 567 8900">
+                
+                <label>Summary</label>
+                <textarea name="summary" placeholder="Brief professional summary..."></textarea>
+                
+                <label>Technical Skills</label>
+                <textarea name="technical_skills" placeholder="Python, Java, SQL..."></textarea>
+                
+                <button type="submit">Save Employee</button>
+            </form>
+        </div>
 
-<h2>Add Project</h2>
-<form action="/add_project" method="post">
-    Project Name: <input type="text" name="project_name" required><br>
-    Description: <textarea name="description"></textarea><br>
-    Technologies Used: <textarea name="technologies_used"></textarea><br>
-    <button type="submit">Add Project</button>
-</form>
+        <div class="card">
+            <h2>Add Project</h2>
+            <form action="/add_project" method="post">
+                <label>Project Name</label>
+                <input type="text" name="project_name" required placeholder="E-commerce Platform">
+                
+                <label>Description</label>
+                <textarea name="description" placeholder="Describe the project scope..."></textarea>
+                
+                <label>Technologies Used</label>
+                <textarea name="technologies_used" placeholder="Django, React, AWS..."></textarea>
+                
+                <button type="submit">Save Project</button>
+            </form>
+        </div>
 
-<hr>
+        <div class="card">
+            <h2>Assign Project</h2>
+            <form action="/assign_project" method="post">
+                <label>Select Employee</label>
+                <select name="employee_id" required>
+                    <option value="" disabled selected>-- Choose Employee --</option>
+                    {% for emp in employees %}
+                        <option value="{{ emp.employee_id }}">{{ emp.name }}</option>
+                    {% endfor %}
+                </select>
 
-<h2>Assign Project</h2>
-<form action="/assign_project" method="post">
-    Employee:
-    <select name="employee_id">
-        {% for emp in employees %}
-            <option value="{{ emp.employee_id }}">{{ emp.name }}</option>
-        {% endfor %}
-    </select><br>
+                <label>Select Project</label>
+                <select name="project_id" required>
+                    <option value="" disabled selected>-- Choose Project --</option>
+                    {% for proj in projects %}
+                        <option value="{{ proj.project_id }}">{{ proj.project_name }}</option>
+                    {% endfor %}
+                </select>
 
-    Project:
-    <select name="project_id">
-        {% for proj in projects %}
-            <option value="{{ proj.project_id }}">{{ proj.project_name }}</option>
-        {% endfor %}
-    </select><br>
-
-    Role: <input type="text" name="role"><br>
-    <button type="submit">Assign</button>
-</form>
-
-<hr>
-
-<h2>Search Employee</h2>
-<form action="/generate" method="post">
-    <input type="text" name="query" placeholder="Enter Employee ID or Name" required>
-    <button type="submit">Generate Resume</button>
-</form>
+                <label>Role in Project</label>
+                <input type="text" name="role" placeholder="Lead Developer, QA, etc.">
+                
+                <button type="submit">Assign Project</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
